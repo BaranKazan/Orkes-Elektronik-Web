@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Col, Button, Alert } from 'react-bootstrap'
+import { Form, Col, Button, Alert, Container } from 'react-bootstrap'
 import '../App.css';
 import countryList from 'react-select-country-list'
 
@@ -9,7 +9,6 @@ class ContactUs extends Component {
         super();
 
         this.options = countryList().getData();
-
 
         this.state = {
             firstName: '',
@@ -38,72 +37,74 @@ class ContactUs extends Component {
 
         return (
             <React.Fragment>
-                {this.state.successMessage &&
-                    <Alert variant="success" onClose={() => this.setState({ successMessage: false })} dismissible>
-                        <p>The data has been recived</p>
-                    </Alert>
-                }
-                <Form>
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="firstName">
-                            <Form.Label>First Name</Form.Label>
-                            <Form.Control onChange={this.changeFirstName} isValid={this.state.validFirstName}
-                                isInvalid={this.state.validFirstName === null ? false : !this.state.validFirstName} required />
+                <Container>
+                    {this.state.successMessage &&
+                        <Alert variant="success" onClose={() => this.setState({ successMessage: false })} dismissible>
+                            <p>The data has been recived</p>
+                        </Alert>
+                    }
+                    <Form>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="firstName">
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control onChange={this.changeFirstName} isValid={this.state.validFirstName}
+                                    isInvalid={this.state.validFirstName === null ? false : !this.state.validFirstName} required />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="secondName">
+                                <Form.Label>Last Name</Form.Label>
+                                <Form.Control onChange={this.changeSecondName} isValid={this.state.validLastName}
+                                    isInvalid={this.state.validLastName === null ? false : !this.state.validLastName} required />
+                            </Form.Group>
+                        </Form.Row>
+
+                        <Form.Group controlId="companyName">
+                            <Form.Label>Company Name</Form.Label>
+                            <Form.Control onChange={this.changeCompanyName} isValid={this.state.validCompanyName}
+                                isInvalid={this.state.validCompanyName === null ? false : !this.state.validCompanyName} required />
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="secondName">
-                            <Form.Label>Last Name</Form.Label>
-                            <Form.Control onChange={this.changeSecondName} isValid={this.state.validLastName}
-                                isInvalid={this.state.validLastName === null ? false : !this.state.validLastName} required />
+                        <Form.Group controlId="email">
+                            <Form.Label>E-mail</Form.Label>
+                            <Form.Control onChange={this.changeEmail} isValid={this.state.validEmail}
+                                isInvalid={this.state.validEmail === null ? false : !this.state.validEmail} required />
                         </Form.Group>
-                    </Form.Row>
 
-                    <Form.Group controlId="companyName">
-                        <Form.Label>Company Name</Form.Label>
-                        <Form.Control onChange={this.changeCompanyName} isValid={this.state.validCompanyName}
-                            isInvalid={this.state.validCompanyName === null ? false : !this.state.validCompanyName} required />
-                    </Form.Group>
+                        <Form.Group controlId="phoneNumber">
+                            <Form.Label>Phone Number</Form.Label>
+                            <Form.Control onChange={this.changePhoneNumber} isValid={this.state.validPhoneNumber}
+                                isInvalid={this.state.validPhoneNumber === null ? false : !this.state.validPhoneNumber} required />
+                        </Form.Group>
 
-                    <Form.Group controlId="email">
-                        <Form.Label>E-mail</Form.Label>
-                        <Form.Control onChange={this.changeEmail} isValid={this.state.validEmail}
-                            isInvalid={this.state.validEmail === null ? false : !this.state.validEmail} required />
-                    </Form.Group>
+                        <Form.Group controlId="country">
+                            <Form.Label>Country</Form.Label>
+                            <Form.Control as="select" defaultValue="Select country..." onChange={this.changeCountry} isValid={this.state.validCountry}
+                                isInvalid={this.state.validCountry === null ? false : !this.state.validCountry} required>
+                                <option>Select country...</option>
+                                {
+                                    this.options.map((value, i) => {
+                                        return <option value={value.label} key={i}>{value.label}</option>
+                                    })
+                                }
+                            </Form.Control>
+                        </Form.Group>
 
-                    <Form.Group as={Col} controlId="phoneNumber">
-                        <Form.Label>Phone Number</Form.Label>
-                        <Form.Control onChange={this.changePhoneNumber} isValid={this.state.validPhoneNumber}
-                            isInvalid={this.state.validPhoneNumber === null ? false : !this.state.validPhoneNumber} required />
-                    </Form.Group>
+                        <Form.Group controlId="subject">
+                            <Form.Label>Subject</Form.Label>
+                            <Form.Control onChange={this.changeSubject} isValid={this.state.validSubject}
+                                isInvalid={this.state.validSubject === null ? false : !this.state.validSubject} required />
+                        </Form.Group>
 
-                    <Form.Group as={Col} controlId="country">
-                        <Form.Label>Country</Form.Label>
-                        <Form.Control as="select" defaultValue="Select country..." onChange={this.changeCountry} isValid={this.state.validCountry}
-                            isInvalid={this.state.validCountry === null ? false : !this.state.validCountry} required>
-                            <option>Select country...</option>
-                            {
-                                this.options.map((value, i) => {
-                                    return <option value={value.label} key={i}>{value.label}</option>
-                                })
-                            }
-                        </Form.Control>
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="subject">
-                        <Form.Label>Subject</Form.Label>
-                        <Form.Control onChange={this.changeSubject} isValid={this.state.validSubject}
-                            isInvalid={this.state.validSubject === null ? false : !this.state.validSubject} required />
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="message">
-                        <Form.Label>Message</Form.Label>
-                        <Form.Control as="textarea" onChange={this.changeMessage} isValid={this.state.validMessage}
-                            isInvalid={this.state.validMessage === null ? false : !this.state.validMessage} required />
-                    </Form.Group>
-                    <Button variant="primary" type="submit" onClick={this.buttonClicked}>
-                        Submit
-                </Button>
-                </Form>
+                        <Form.Group controlId="message">
+                            <Form.Label>Message</Form.Label>
+                            <Form.Control as="textarea" onChange={this.changeMessage} isValid={this.state.validMessage}
+                                isInvalid={this.state.validMessage === null ? false : !this.state.validMessage} required />
+                        </Form.Group>
+                        <Button variant="primary" type="submit" onClick={this.buttonClicked}>
+                            Submit
+                        </Button>
+                    </Form>
+                </Container>
             </React.Fragment>
         );
     }
@@ -111,7 +112,7 @@ class ContactUs extends Component {
     buttonClicked = (e) => {
         e.preventDefault();
         console.log(this.state)
-        this.setState({ successMessage: true });
+        this.setState({ successMessage: true })
     }
 
     changeFirstName = (e) => {
