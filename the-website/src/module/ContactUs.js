@@ -111,8 +111,44 @@ class ContactUs extends Component {
 
     buttonClicked = (e) => {
         e.preventDefault();
+        let pass = true
+
+        if(this.state.validFirstName === null || this.state.validFirstName === false){
+            pass = false
+            this.setState({validFirstName: false})
+        }
+        if(this.state.validLastName === null || this.state.validLastName === false){
+            pass = false
+            this.setState({validLastName: false})
+        }
+        if(this.state.validCompanyName === null || this.state.validCompanyName === false){
+            pass = false
+            this.setState({validCompanyName: false})
+        }
+        if(this.state.validEmail === null || this.state.validEmail === false){
+            pass = false
+            this.setState({validEmail: false})
+        }
+        if(this.state.validPhoneNumber === null || this.state.validPhoneNumber === false){
+            pass = false
+            this.setState({validPhoneNumber: false})
+        }
+        if(this.state.validCountry === null || this.state.validCountry === false){
+            pass = false
+            this.setState({validCountry: false})
+        }
+        if(this.state.validSubject === null || this.state.validSubject === false){
+            pass = false
+            this.setState({validSubject: false})
+        }
+        if(this.state.validMessage === null || this.state.validMessage === false){
+            pass = false
+            this.setState({validMessage: false})
+        }
+        if(pass){
+            this.setState({ successMessage: true })
+        }
         console.log(this.state)
-        this.setState({ successMessage: true })
     }
 
     changeFirstName = (e) => {
