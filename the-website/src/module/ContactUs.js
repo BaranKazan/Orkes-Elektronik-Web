@@ -15,7 +15,7 @@ class ContactUs extends Component {
             lastName: '',
             companyName: '',
             email: '',
-            phoneNumber: 0,
+            phoneNumber: '',
             country: '',
             subject: '',
             message: '',
@@ -37,7 +37,7 @@ class ContactUs extends Component {
 
         return (
             <React.Fragment>
-                <Container>
+                <Container style={{marginTop:"20px"}}>
                     {this.state.successMessage &&
                         <Alert variant="success" onClose={() => this.setState({ successMessage: false })} dismissible>
                             <p>The data has been recived</p>
@@ -100,7 +100,7 @@ class ContactUs extends Component {
                             <Form.Control as="textarea" onChange={this.changeMessage} isValid={this.state.validMessage}
                                 isInvalid={this.state.validMessage === null ? false : !this.state.validMessage} required />
                         </Form.Group>
-                        <Button variant="primary" type="submit" onClick={this.buttonClicked}>
+                        <Button variant="success" type="submit" onClick={this.buttonClicked}>
                             Submit
                         </Button>
                     </Form>
@@ -112,7 +112,6 @@ class ContactUs extends Component {
     buttonClicked = (e) => {
         e.preventDefault();
         let pass = true
-
         if(this.state.validFirstName === null || this.state.validFirstName === false){
             pass = false
             this.setState({validFirstName: false})
