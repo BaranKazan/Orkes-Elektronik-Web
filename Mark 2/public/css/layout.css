@@ -840,6 +840,7 @@ call-to-action .button {
 	float: left;
    width: 26%;
 }
+
 #contact input,
 #contact textarea,
 #contact select {
@@ -852,7 +853,9 @@ call-to-action .button {
    font-size: 15px;
    line-height: 24px;
    width: 65%;
+   resize: none;
 }
+
 #contact input:focus,
 #contact textarea:focus,
 #contact select:focus {
