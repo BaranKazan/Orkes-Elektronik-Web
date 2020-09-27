@@ -100,7 +100,7 @@ class ContactUs extends Component {
                             <Form.Control as="textarea" onChange={this.changeMessage} isValid={this.state.validMessage}
                                 isInvalid={this.state.validMessage === null ? false : !this.state.validMessage} required />
                         </Form.Group>
-                        <Button variant="success" type="submit" onClick={this.buttonClicked}>
+                        <Button variant="primary" type="submit" onClick={this.buttonClicked}>
                             Submit
                         </Button>
                     </Form>

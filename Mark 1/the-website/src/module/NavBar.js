@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function NavBar() {
     return (
-        <Navbar style={{backgroundColor: "#296137"}} expand="lg">
+        <Navbar style={{backgroundColor: "#0e4eb5"}} expand="lg">
             <Navbar.Brand style={{color:"white"}} href="/">Orkes Elektronik</Navbar.Brand>
             <Navbar.Toggle style={{backgroundColor:"white"}} aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
