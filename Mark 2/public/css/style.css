@@ -10,6 +10,102 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+/*Navbar color text*/
+ul#nav li.current a{
+  color: #1278bd;
+}
+
+/*Navbar background color*/
+.opaque{
+  background-color: rgb(136 136 136);
+}
+
+/*Canvas background color*/
+canvas{
+  background-color: #dedede;
+}
+
+/*Header title color*/
+header .banner-text h1{
+  color: #024978;
+}
+
+/*Heder line color*/
 header .banner-text hr{
-    border-color: white;
+    border-color: #024978;
+}
+
+/*Header subtitle color*/
+header .banner-text h3{
+  color: #024978;
+}
+
+/*Header button color*/
+header .scrolldown a{
+  color: #505050;
+}
+header .scrolldown a:hover{
+  color: #1278bd;
+}
+
+/*About background color*/
+#about{
+  background-color: #043555;
+}
+
+/*Contact background color*/
+#contact{
+  background-color: #f9f9f9;
+}
+
+/*Contact icon color*/
+#contact h1:before{
+  color: #373233;
+}
+
+/*The title color in contact us for the mobile version*/
+#contact h1{
+  color: #fff;
+}
+
+/*Subtitle color in contact us*/
+#contact p.lead{
+  color: #111;
+}
+
+/*The color of the label in contact*/
+#contact label{
+  color: #111;
+}
+
+/*Design of the input in contact*/
+#contact input, #contact textarea, #contact select{
+  background-color: #ededed; 
+  color: #333;
+}
+#contact input:focus, #contact textarea:focus, #contact select:focus{
+  background-color: #e2e2e2;
+  color: #333;
+}
+
+/*Button color in contact*/
+#contact button.submit{
+  background-color: #053554;
+}
+#contact button.submit:hover{
+  background-color: #333;
+  color: white;
+}
+
+/*Footer text color*/
+footer {
+  color: #c3c3c3;
+}
+
+/*Mobile design*/
+@media only screen and (max-width: 767px) {
+  /*Navbar color*/
+  #nav-wrap > a{
+    background-color: #007eff;
+  }
 }
