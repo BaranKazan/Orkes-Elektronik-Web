@@ -40,6 +40,19 @@ class Contact extends Component {
             <div className="row">
                <div className="eight columns">
                   <form onSubmit={this.buttonClicked}>
+                     {this.state.successMessage &&
+                        <div className="alert success">
+                           <span className="closebtn" onClick={() => {this.setState({successMessage:false})}}>&times;</span>
+                           <strong>Message Recived!</strong> <p>Thank you for submiting your message, we will reply soon as possible.</p>
+                     </div>
+                     }
+                     {this.state.failedMessage &&
+                        <div className="alert">
+                           <span className="closebtn" onClick={() => { this.setState({ failedMessage: false }) }}>&times;</span>
+                           <strong>Something went wrong.</strong>
+                           <p>Please check your message or contact us with our email address.</p>
+                     </div>
+                     }
                      <fieldset>
                         <div>
                            <label htmlFor="firstName">First Name: <span className="required">*</span></label>
@@ -85,14 +98,6 @@ class Contact extends Component {
                         </div>
                      </fieldset>
                   </form>
-                  {this.state.successMessage &&
-                     <div id="message-success">
-                        <i className="fa fa-check"></i>Your message was sent, thank you!<br />
-                     </div>
-                  }
-                  {this.state.failedMessage &&
-                     <div id="message-warning"> Error boy</div>
-                  }
                </div>
             </div>
          </section>
@@ -144,10 +149,9 @@ class Contact extends Component {
             document.getElementById("message").style.border = "2px groove red";
          }
          if (pass) {
-            this.setState({ successMessage: true, eventTarget: e.target })
+            this.setState({ eventTarget: e.target })
             resolve('Passed')
          } else {
-            this.setState({ failedMessage: true })
             rejected('Failed')
          }
       });
@@ -161,12 +165,13 @@ class Contact extends Component {
    }
 
    sendEmail = () => {
-      console.log(this.state.eventTarget)
       emailjs.sendForm('service_bvf8f8s', 'template_ev8sehc', this.state.eventTarget, 'user_tiZidkGI3U0Mv4FPxXAlO')
          .then((result) => {
             console.log(result.text);
+            this.setState({successMessage:true})
          }, (error) => {
             console.log(error.text);
+            this.setState({failedMessage:true})
          });
    }
 
