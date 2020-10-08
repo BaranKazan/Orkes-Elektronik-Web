@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import countryList from 'react-select-country-list';
-import emailjs from 'emailjs-com';
+import countryList from 'react-select-country-list'
 
 class Contact extends Component {
 
@@ -10,21 +9,27 @@ class Contact extends Component {
       this.options = countryList().getData();
 
       this.state = {
-         eventTarget: null,
+          firstName: '',
+          lastName: '',
+          companyName: '',
+          email: '',
+          phoneNumber: '',
+          country: '',
+          subject: '',
+          message: '',
 
-         validFirstName: null,
-         validLastName: null,
-         validCompanyName: null,
-         validEmail: null,
-         validPhoneNumber: null,
-         validCountry: null,
-         validSubject: null,
-         validMessage: null,
+          validFirstName: null,
+          validLastName: null,
+          validCompanyName: null,
+          validEmail: null,
+          validPhoneNumber: null,
+          validCountry: null,
+          validSubject: null,
+          validMessage: null,
 
-         successMessage: false,
-         failedMessage: false
+          successMessage: false,
       }
-   }
+  }
 
    render() {
       return (
@@ -34,12 +39,12 @@ class Contact extends Component {
                   <h1><span>Contact us</span></h1>
                </div>
                <div className="ten columns">
-                  <p className="lead">Do you have some questions, please make sure to contact us then.</p>
+                  <p className="lead">message</p>
                </div>
             </div>
             <div className="row">
                <div className="eight columns">
-                  <form onSubmit={this.buttonClicked}>
+                  <form>
                      <fieldset>
                         <div>
                            <label htmlFor="firstName">First Name: <span className="required">*</span></label>
@@ -54,45 +59,44 @@ class Contact extends Component {
                            <input type="text" id="companyName" name="companyName" onChange={this.changeCompanyName} />
                         </div>
                         <div>
-                           <label htmlFor="email">E-mail: <span className="required">*</span></label>
-                           <input type="text" id="email" name="email" onChange={this.changeEmail} />
-                        </div>
+                           <label htmlFor="contactEmail">E-mail: <span className="required">*</span></label>
+                           <input type="text" id="contactEmail" name="contactEmail" onChange={this.changeEmail} />
+                        </div>       
                         <div>
                            <label htmlFor="phoneNumber">Phoner Number: <span className="required">*</span></label>
                            <input type="number" id="phoneNumber" name="phoneNumber" onChange={this.changePhoneNumber} />
-                        </div>
+                        </div> 
                         <div>
                            <label htmlFor="country">Country: <span className="required">*</span></label>
-                           <select defaultValue="Select country..." id="country" name="country" onChange={this.changeCountry}>
+                           <select defaultValue="Select country..." onChange={this.changeCountry}>
                               <option>Select country...</option>
                               {
-                                 this.options.map((value, i) => {
-                                    return <option value={value.label} key={i}>{value.label}</option>
-                                 })
-                              }
+                                    this.options.map((value, i) => {
+                                        return <option value={value.label} key={i}>{value.label}</option>
+                                    })
+                                }
                            </select>
-                        </div>
+                        </div> 
                         <div>
-                           <label htmlFor="subject">Subject: <span className="required">*</span></label>
-                           <input type="text" id="subject" name="subject" onChange={this.changeSubject} />
+                           <label htmlFor="contactSubject">Subject: <span className="required">*</span></label>
+                           <input type="text" id="contactSubject" name="contactSubject" onChange={this.changeSubject} />
                         </div>
                         <div>
                            <label htmlFor="message">Message: <span className="required">*</span></label>
-                           <textarea cols="50" rows="15" id="message" name="message" onChange={this.changeMessage} />
+                           <textarea cols="50" rows="15" id="message" name="message" onChange={this.changeMessage}/>
                         </div>
                         <div>
-                           <button className="submit">Submit</button>
+                           <button className="submit" onClick={this.buttonClicked}>Submit</button>
+                           <span id="image-loader">
+                              <img alt="" src="images/loader.gif" />
+                           </span>
                         </div>
                      </fieldset>
                   </form>
-                  {this.state.successMessage &&
-                     <div id="message-success">
-                        <i className="fa fa-check"></i>Your message was sent, thank you!<br />
-                     </div>
-                  }
-                  {this.state.failedMessage &&
-                     <div id="message-warning"> Error boy</div>
-                  }
+                  <div id="message-warning"> Error boy</div>
+                  <div id="message-success">
+                     <i className="fa fa-check"></i>Your message was sent, thank you!<br />
+                  </div>
                </div>
             </div>
          </section>
@@ -100,157 +104,110 @@ class Contact extends Component {
    }
 
    buttonClicked = (e) => {
-      e.preventDefault()
-      let promise = new Promise((resolve, rejected) => {
-         let pass = true
-         if (this.state.validFirstName === null || this.state.validFirstName === false) {
-            pass = false
-            this.setState({ validFirstName: false })
-            document.getElementById("firstName").style.border = "2px groove red";
-         }
-         if (this.state.validLastName === null || this.state.validLastName === false) {
-            pass = false
-            this.setState({ validLastName: false })
-            document.getElementById("lastName").style.border = "2px groove red";
-         }
-         if (this.state.validCompanyName === null || this.state.validCompanyName === false) {
-            pass = false
-            this.setState({ validCompanyName: false })
-            document.getElementById("companyName").style.border = "2px groove red";
-         }
-         if (this.state.validEmail === null || this.state.validEmail === false) {
-            pass = false
-            this.setState({ validEmail: false })
-            document.getElementById("email").style.border = "2px groove red";
-         }
-         if (this.state.validPhoneNumber === null || this.state.validPhoneNumber === false) {
-            pass = false
-            this.setState({ validPhoneNumber: false })
-            document.getElementById("phoneNumber").style.border = "2px groove red";
-         }
-         if (this.state.validCountry === null || this.state.validCountry === false) {
-            pass = false
-            this.setState({ validCountry: false })
-            document.getElementById("country").style.border = "2px groove red";
-         }
-         if (this.state.validSubject === null || this.state.validSubject === false) {
-            pass = false
-            this.setState({ validSubject: false })
-            document.getElementById("subject").style.border = "2px groove red";
-         }
-         if (this.state.validMessage === null || this.state.validMessage === false) {
-            pass = false
-            this.setState({ validMessage: false })
-            document.getElementById("message").style.border = "2px groove red";
-         }
-         if (pass) {
-            this.setState({ successMessage: true, eventTarget: e.target })
-            resolve('Passed')
-         } else {
-            this.setState({ failedMessage: true })
-            rejected('Failed')
-         }
-      });
-
-      promise.then((message) => {
-         console.log(message);
-         this.sendEmail()
-      }).catch((message) => {
-         console.log(message);
-      })
-   }
-
-   sendEmail = () => {
-      console.log(this.state.eventTarget)
-      emailjs.sendForm('service_bvf8f8s', 'template_ev8sehc', this.state.eventTarget, 'user_tiZidkGI3U0Mv4FPxXAlO')
-         .then((result) => {
-            console.log(result.text);
-         }, (error) => {
-            console.log(error.text);
-         });
+      e.preventDefault();
+      let pass = true
+      if (this.state.validFirstName === null || this.state.validFirstName === false) {
+         pass = false
+         this.setState({ validFirstName: false })
+      }
+      if (this.state.validLastName === null || this.state.validLastName === false) {
+         pass = false
+         this.setState({ validLastName: false })
+      }
+      if (this.state.validCompanyName === null || this.state.validCompanyName === false) {
+         pass = false
+         this.setState({ validCompanyName: false })
+      }
+      if (this.state.validEmail === null || this.state.validEmail === false) {
+         pass = false
+         this.setState({ validEmail: false })
+      }
+      if (this.state.validPhoneNumber === null || this.state.validPhoneNumber === false) {
+         pass = false
+         this.setState({ validPhoneNumber: false })
+      }
+      if (this.state.validCountry === null || this.state.validCountry === false) {
+         pass = false
+         this.setState({ validCountry: false })
+      }
+      if (this.state.validSubject === null || this.state.validSubject === false) {
+         pass = false
+         this.setState({ validSubject: false })
+      }
+      if (this.state.validMessage === null || this.state.validMessage === false) {
+         pass = false
+         this.setState({ validMessage: false })
+      }
+      if (pass) {
+         this.setState({ successMessage: true })
+      }
+      console.log(this.state)
    }
 
    changeFirstName = (e) => {
       if (!(e.target.value === "")) {
-         this.setState({ validFirstName: true })
-         document.getElementById("firstName").style.border = "2px groove green";
+         this.setState({ firstName: e.target.value, validFirstName: true })
       } else {
          this.setState({ validFirstName: false })
-         document.getElementById("firstName").style.border = "2px groove red";
       }
    }
 
    changeLastName = (e) => {
       if (!(e.target.value === "")) {
-         this.setState({ validLastName: true })
-         document.getElementById("lastName").style.border = "2px groove green";
+         this.setState({ lastName: e.target.value, validLastName: true })
       } else {
          this.setState({ validLastName: false })
-         document.getElementById("lastName").style.border = "2px groove red";
       }
    }
 
    changeCompanyName = (e) => {
       if (!(e.target.value === "")) {
-         this.setState({ validCompanyName: true })
-         document.getElementById("companyName").style.border = "2px groove green";
-
+         this.setState({ companyName: e.target.value, validCompanyName: true })
       } else {
          this.setState({ validCompanyName: false })
-         document.getElementById("companyName").style.border = "2px groove red";
       }
    }
 
    changeEmail = (e) => {
       const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (regex.test(e.target.value)) {
-         this.setState({ validEmail: true });
-         document.getElementById("email").style.border = "2px groove green";
+         this.setState({ email: e.target.value, validEmail: true });
       } else {
          this.setState({ validEmail: false });
-         document.getElementById("email").style.border = "2px groove red";
       }
    }
 
    changePhoneNumber = (e) => {
       const regex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/
       if (regex.test(e.target.value)) {
-         this.setState({ validPhoneNumber: true });
-         document.getElementById("phoneNumber").style.border = "2px groove green";
+         this.setState({ phoneNumber: e.target.value, validPhoneNumber: true });
       } else {
          this.setState({ validPhoneNumber: false })
-         document.getElementById("phoneNumber").style.border = "2px groove red";
       }
    }
 
    changeCountry = e => {
       let value = e.target.value
       if (!((value === "Select country...") || (value === ""))) {
-         this.setState({ validCountry: true });
-         document.getElementById("country").style.border = "2px groove green";
+         this.setState({ country: value, validCountry: true });
       } else {
          this.setState({ validCountry: false })
-         document.getElementById("country").style.border = "2px groove red";
       }
    }
 
    changeSubject = (e) => {
       if (!(e.target.value === "")) {
-         this.setState({ validSubject: true })
-         document.getElementById("subject").style.border = "2px groove green";
+         this.setState({ subject: e.target.value, validSubject: true })
       } else {
          this.setState({ validSubject: false })
-         document.getElementById("subject").style.border = "2px groove red";
       }
    }
 
    changeMessage = (e) => {
       if (!(e.target.value === "")) {
-         this.setState({ validMessage: true })
-         document.getElementById("message").style.border = "2px groove green";
+         this.setState({ message: e.target.value, validMessage: true })
       } else {
          this.setState({ validMessage: false })
-         document.getElementById("message").style.border = "2px groove red";
       }
    }
 

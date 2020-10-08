@@ -5,7 +5,7 @@ class Header extends Component {
   render() {
     return (
       <header id="home">
-      <ParticlesBg type="cobweb" num={50} bg={true} />
+      <ParticlesBg type="circle" num={100} bg={true} />
       <nav id="nav-wrap">
          <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
 	      <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
@@ -20,8 +20,9 @@ class Header extends Component {
       <div className="row banner">
       
          <div className="banner-text">
-            <h1 className="responsive-headline">Orkes Elektronik</h1>
+            <h1 className="responsive-headline">Orkes elektronik</h1>
             <hr />
+            <h3>Hello world.</h3>
          </div>
       </div>
 
