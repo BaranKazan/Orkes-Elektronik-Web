@@ -9,7 +9,7 @@ class Footer extends Component {
         <div className="twelve columns">
 
            <ul className="copyright">
-              <li>&copy; Copyright 2020 Orkes elektronik</li>
+              <li>&copy; Copyright 2020 Orkes Elektronik</li>
            </ul>
 
         </div>
