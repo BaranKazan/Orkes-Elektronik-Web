@@ -99,6 +99,19 @@ class Contact extends Component {
                      </fieldset>
                   </form>
                </div>
+               <aside className="four columns footer-widgets">
+                  <div className="widget widget_contact">
+
+                     <h4>Address and Phone</h4>
+                     <p className="address">
+                        Orkes Elektronik<br/>
+                     Sweden<br/>
+						   Phone: +46 31 787 35 36<br/>
+						   info@orkes.eu<br/>
+                     </p>
+                  </div>
+
+               </aside>
             </div>
          </section>
       );
