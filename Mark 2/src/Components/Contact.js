@@ -178,7 +178,7 @@ class Contact extends Component {
    }
 
    sendEmail = () => {
-      emailjs.sendForm('service_bvf8f8s', 'template_ev8sehc', this.state.eventTarget, 'user_tiZidkGI3U0Mv4FPxXAlO')
+      emailjs.sendForm('service_tx8rh9w', 'template_e3qrbyj', this.state.eventTarget, 'user_NVnQ0iILFLe3ZO4fZyEOn')
          .then((result) => {
             console.log(result.text);
             this.setState({successMessage:true})
